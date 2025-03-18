@@ -4,6 +4,7 @@ import HomePage from './Home'
 import React, {use, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import image from '../assets/image.png';
+import Swal from 'sweetalert2'
 
 function LoginPage(){
 
@@ -27,11 +28,24 @@ function LoginPage(){
         }
         const validatePassword = () => {
             if(password.length < minLength){
-                alert("Password must be at least 8 characters");
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Password must be at least 8 characters",
+                    delay: 5000,
+                });
             }else if(!HasUppercase){
-                alert("Password must contain at least one uppercase letter");
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Password must contain at least one uppercase letter",
+                });
             }else if(!hasSpecialChar){
-                alert("Password must contain at least one special character");
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Password must contain at least one special character",
+                });
             }
             else{
                 return true;
@@ -40,12 +54,16 @@ function LoginPage(){
 
         const handleLogin = (e) => {
             if(validatePassword() && (email === "admin@gmail.com" && password === "Admin123@") && validateEmail(email)){ 
-                alert("Login Success");
+                Swal.fire({
+                    title: "Login Success!",
+                    text: "Ready to explore?",
+                    icon: "success"
+                });
                 setLogin(true);
                 // window.location.href = "/home";
                 routeChange();
             }else{
-                alert("Login Failed");
+                // alert("Login Failed");
             }
         }
         
